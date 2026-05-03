@@ -4,4 +4,6 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+  background: radial-gradient(circle at top, #d1d3f1, #f3f7ff 60%, #b7ecfa);
 }
+

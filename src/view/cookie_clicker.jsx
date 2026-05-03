@@ -6,10 +6,18 @@ export default function CookieClicker() {
     const [points, setPoints] = useState(0);
 
     return (
-        <div className={style.container}>
-            <h1>Cookie Clicker</h1>
-            <p>Click the cookie to earn points!</p>
+    <div className={style.container}>
+        <div className={style.card}>
+            <h1 className={style.title}>🍪Cookie Clicker</h1>
+            <p className={style.subtitle}>Click the cookie and earn points</p>
+
+            <div className={style.scoreBox}>
+                <p className={style.scoreLabel}>Points</p>
+                <p className={style.score}>{points}</p>
+            </div>
+
             <Cookie setPoints={() => setPoints((prev) => prev + 1)} />
-            <p>Points: {points}</p>
+
         </div>
+    </div>
     );}
