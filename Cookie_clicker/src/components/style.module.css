@@ -1,0 +1,35 @@
+.cookie {
+    width: 300px;
+    height: 300px;
+    margin: 2rem;
+    cursor: pointer;
+    transition: transform 0.1s ease, filter 0.1s ease;
+}
+
+.cookie:hover {
+    transform: scale(1.05);
+    filter: brightness(1.05);
+}
+
+.cookie:active {
+    transform: scale(0.95);
+    filter: brightness(0.9);
+}
+
+.plusOne {
+    position: absolute;
+    font-size: 1.5rem;
+    color: white;
+    animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
