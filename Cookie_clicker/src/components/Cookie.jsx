@@ -30,6 +30,7 @@ export default function CookieClicker({ setPoints }) {
                 src={image}
                 role="button"
                 alt="Cookie"
+                draggable="false"
                 className={style.cookie}
                 onClick={handleClick}
                 tabIndex={0}
