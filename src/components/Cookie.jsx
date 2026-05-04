@@ -3,7 +3,7 @@ import image from "../assets/cookie_pixel.svg";
 import style from "./style.module.css";
 import audio from "../assets/crunch.mp3";
 
-export default function CookieClicker({ setPoints }) {
+export default function CookieClicker({ setPoints, ppc }) {
     const [particles, setParticles] = useState([]);
     const crunchSound = new Audio(audio);
 
@@ -42,7 +42,7 @@ export default function CookieClicker({ setPoints }) {
                     className={style.plusOne}
                     style={{ left: p.x, top: p.y }}
                 >
-                    +1
+                    +{ppc}
                 </span>
             ))}
         </div>
