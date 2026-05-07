@@ -143,7 +143,7 @@
   cursor: pointer;
   z-index: 9999;
 
-  animation: roll 5s linear forwards;
+  animation: roll 10s linear forwards;
 }
 
 @keyframes roll {
@@ -151,7 +151,7 @@
     transform: translateX(-60px) rotate(0deg);
   }
   to {
-    transform: translateX(110vw) rotate(720deg);
+    transform: translateX(110vw) rotate(1440deg);
   }
 }
 

@@ -131,7 +131,7 @@ export default function CookieClicker() {
                 x: -60,
                 y: Math.random() * (window.innerHeight - 60)
             });
-            setTimeout(() => setRollingCookie(null), 6000);
+            setTimeout(() => setRollingCookie(null), 11000);
             setTimeout(() => { setRollingCookieCooldown(false); }, 60000);
         }
     };
