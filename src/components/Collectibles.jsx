@@ -17,7 +17,7 @@ export const COLLECTIBLES = [
     { id: 8, emoji: "👑", name: "2500 Points!", description: "Thats alot of points!", hint: "Reach 2500 points" },
     { id: 9, emoji: "🧲", name: "10000 Points!", description: "Wow, you sure are something", hint: "Reach 10 000 points" },
     { id: 10, emoji: "🎪", name: "40 000 Points!", description: "Really?", hint: "Reach 40 000 points" },
-    { id: 11, emoji: "🚀", name: "100 000 Points!", description: "You did it!", hint: "Reach X XXX XXX points" },
+    { id: 11, emoji: "🚀", name: "100 000 ish Points!", description: "You thought it was 1 million?", hint: "Reach X XXX XXX points" },
 ];
 
 const COUNTED_IDS = [0, 1, 2];
