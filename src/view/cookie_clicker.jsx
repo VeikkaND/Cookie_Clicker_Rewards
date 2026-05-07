@@ -122,95 +122,74 @@ export default function CookieClicker() {
     return (
         <div className={style.container}>
             <div className={style.cardContainer}>
-                <div className={style.card} style={{ alignSelf: "start" }}>
-                    <h1 className={style.title}>Shop</h1>
 
-                    <p className={style.subtitle}>
-                        Points per click: {ppc}
-                    </p>
-
-                    <p className={style.subtitle}>
-                        Cookie Monsters: {cookieMonsters}
-                    </p>
-
-                    <Shop
-                        title="Upgrade Click"
-                        cost={upgradeCost}
-                        points={points}
-                        onBuy={() => {
-                            setPpc((prev) => prev + 1);
-                            setPoints((prev) => prev - upgradeCost);
-                        }}
-                    />
-
-                    <Shop
-                        title="Cookie Monster (+1/sec)"
-                        cost={cookieMonsterCost}
-                        points={points}
-                        onBuy={() => {
-                            setCookieMonsters((prev) => prev + 1);
-                            setPoints((prev) => prev - cookieMonsterCost);
-                        }}
-                    />
-
-                </div>
-
-
-                <div className={style.card}>
-                    <h1 className={style.title}>🍪Cookie Clicker</h1>
-
-                    <p className={style.subtitle}>
-                        Click the cookie and earn points
-                    </p>
-
-                    <div className={style.scoreBox}>
-                        <p className={style.scoreLabel}>Points</p>
-                        <p className={style.score}>{points}</p>
+                <div className={style.leftColumn}>
+                    <div className={style.card}>
+                        <h1 className={style.title}>Shop</h1>
+                        <p className={style.subtitle}>Points per click: {ppc}</p>
+                        <p className={style.subtitle}>Cookie Monsters: {cookieMonsters}</p>
+                        <Shop
+                            title="Upgrade Click"
+                            cost={upgradeCost}
+                            points={points}
+                            onBuy={() => {
+                                setPpc((prev) => prev + 1);
+                                setPoints((prev) => prev - upgradeCost);
+                            }}
+                        />
+                        <Shop
+                            title="Cookie Monster (+1/sec)"
+                            cost={cookieMonsterCost}
+                            points={points}
+                            onBuy={() => {
+                                setCookieMonsters((prev) => prev + 1);
+                                setPoints((prev) => prev - cookieMonsterCost);
+                            }}
+                        />
                     </div>
-                    {goldenCookie && (<img src={cookieImage}
-                        onClick={handleGoldenClick}
-                        className={style.goldenCookie}
-                        style={{
-                            position: "absolute",
-                            left: goldenCookie.x,
-                            top: goldenCookie.y,
-                        }} />
-                    )}
-                    <Cookie
-                        setPoints={() => {
-                            setPoints((prev) => prev + ppc);
-                            setManualClicks((prev) => prev + 1);
-                            handleClickEvents();
-                        }}
-                        ppc={ppc}
-                    />
+
+                    <Collectibles collectibles={[]} />
                 </div>
 
-                <div className={style.card} style={{ opacity: 0 }}>
+                <div className={style.rightColumn}>
+                    <div className={style.card}>
+                        <h1 className={style.title}>🍪Cookie Clicker</h1>
+                        <p className={style.subtitle}>Click the cookie and earn points</p>
+                        <div className={style.scoreBox}>
+                            <p className={style.scoreLabel}>Points</p>
+                            <p className={style.score}>{points}</p>
+                        </div>
+                        {goldenCookie && (
+                            <img src={cookieImage}
+                                onClick={handleGoldenClick}
+                                className={style.goldenCookie}
+                                style={{ position: "absolute", left: goldenCookie.x, top: goldenCookie.y }}
+                            />
+                        )}
+                        <Cookie
+                            setPoints={() => {
+                                setPoints((prev) => prev + ppc);
+                                setManualClicks((prev) => prev + 1);
+                                handleClickEvents();
+                            }}
+                            ppc={ppc}
+                        />
+                    </div>
                 </div>
-            </div>
-            {/* Collectibles row below */}
-            <div className={style.collectiblesRow}>
-                <Collectibles collectibles={[]} />
-            </div>
 
+            </div>
 
             <div className={style.notificationContainer}>
                 {notifications.map((n) => (
-                    <div key={n.id} className={style.notification}>
-                        {n.message}
-                    </div>
+                    <div key={n.id} className={style.notification}>{n.message}</div>
                 ))}
-            </div> {rollingCookie && (<img
-                src={cookieImage}
-                alt="Rolling Cookie"
-                className={style.rollingCookie}
-                style={{
-                    top: rollingCookie.y,
-                    left: rollingCookie.x,
-                }} />
+            </div>
+
+            {rollingCookie && (
+                <img src={cookieImage} alt="Rolling Cookie" className={style.rollingCookie}
+                    style={{ top: rollingCookie.y, left: rollingCookie.x }}
+                />
             )}
         </div>
-
     );
 }
