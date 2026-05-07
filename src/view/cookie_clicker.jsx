@@ -27,19 +27,21 @@ export default function CookieClicker() {
     const [notifications, setNotifications] = useState([]);
     const [rollingCookie, setRollingCookie] = useState(null);
     const [rollingCookieCooldown, setRollingCookieCooldown] = useState(false);
-    const clickTimestamps = useRef([]);
 
-    const trackFastClick = () => {
-        const now = Date.now();
-        clickTimestamps.current.push(now);
-        clickTimestamps.current = clickTimestamps.current.filter((t) => now - t <= 30000);
-        if (clickTimestamps.current.length >= 67) {
-            unlockCollectible(5);
-        }
+    const [challengeActive, setChallengeActive] = useState(false);
+    const [challengeClicks, setChallengeClicks] = useState(0);
+    const [challengeTimeLeft, setChallengeTimeLeft] = useState(15);
+    const challengeClicksRef = useRef(0);
+
+    const startChallenge = () => {
+        setChallengeActive(true);
+        setChallengeClicks(0);
+        setChallengeTimeLeft(15);
+        challengeClicksRef.current = 0;
     };
 
     const upgradeCost = 50;
-    const cookieMonsterCost = 150;
+    const cookieMonsterCost = 250;
 
     const unlockCollectible = (id) => {
         setUnlockedCollectibles((prev) => {
@@ -148,6 +150,27 @@ export default function CookieClicker() {
 
 
     useEffect(() => {
+        if (!challengeActive) return;
+        const interval = setInterval(() => {
+            setChallengeTimeLeft((prev) => {
+                if (prev <= 1) {
+                    clearInterval(interval);
+                    setChallengeActive(false);
+                    if (challengeClicksRef.current >= 67) {
+                        unlockCollectible(5);
+                        addNotification("🎉 Challenge cleared! ⁶🤷‍♂️⁷");
+                    } else {
+                        addNotification(`❌ ${challengeClicksRef.current}/?? — not fast enough!`);
+                    }
+                    return 15;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [challengeActive]);
+
+    useEffect(() => {
         if (cookieMonsters >= 25) {
             unlockCollectible(3);
         }
@@ -205,6 +228,22 @@ export default function CookieClicker() {
                 </div>
 
                 <div className={style.rightColumn}>
+                    {manualClicks >= 100 && !unlockedCollectibles.includes(5) && (
+                        <div className={style.challengeCard}>
+                            <p className={style.challengeTitle}>⚡ Click Challenge</p>
+                            {!challengeActive ? (
+                                <>
+                                    <p className={style.challengeDesc}>Get as many clicks in 15 seconds</p>
+                                    <button className={style.challengeBtn} onClick={startChallenge}>Start Challenge</button>
+                                </>
+                            ) : (
+                                <div className={style.challengeStats}>
+                                    <span className={style.challengeTime}>{challengeTimeLeft}s</span>
+                                    <span className={style.challengeCount}>{challengeClicks}</span>
+                                </div>
+                            )}
+                        </div>
+                    )}
                     <div className={style.card}>
                         <h1 className={style.title}>🍪Cookie Clicker</h1>
                         <p className={style.subtitle}>Click the cookie and earn points</p>
@@ -224,7 +263,10 @@ export default function CookieClicker() {
                                 setPoints((prev) => prev + ppc);
                                 setManualClicks((prev) => prev + 1);
                                 handleClickEvents();
-                                trackFastClick();
+                                if (challengeActive) {
+                                    challengeClicksRef.current += 1;
+                                    setChallengeClicks((prev) => prev + 1);
+                                }
                             }}
                             ppc={ppc}
                         />
