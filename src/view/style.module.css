@@ -87,3 +87,66 @@
     font-size: 2rem;
   }
 }
+
+  .goldenCookie {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    filter: drop-shadow(0 0 12px gold);
+    animation: goldenPulse 0.8s infinite alternate;
+    z-index: 10;
+}
+.notificationContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+.notification {
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  backdrop-filter: blur(6px);
+  animation: popIn 0.2s ease, fadeOut 2.5s ease forwards;
+}
+@keyframes popIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.rollingCookie {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 9999;
+
+  animation: roll 5s linear forwards;
+}
+
+@keyframes roll {
+  from {
+    transform: translateX(-60px) rotate(0deg);
+  }
+  to {
+    transform: translateX(110vw) rotate(720deg);
+  }
+}
