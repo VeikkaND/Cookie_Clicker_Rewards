@@ -27,6 +27,7 @@
     font-size: 1.5rem;
     color: rgb(255, 255, 255);
     animation: floatUp 1s ease-out forwards;
+    pointer-events: none;
 }
 
 @keyframes floatUp {

@@ -1,11 +1,7 @@
 import style from "./style.module.css";
 
-export default function Shop({
-    title,
-    cost,
-    points,
-    onBuy
-}) {
+export default function Shop({title,cost,points,onBuy}) 
+{
 
     const handleClick = () => {
         if (points >= cost) {
