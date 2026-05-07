@@ -88,8 +88,52 @@
     font-size: 2rem;
     background: #f9f9f9;
     color: #353535;
-    overflow: hidden;    /* add this */
     box-sizing: border-box;
+    position: relative;
+}
+.slot:hover .tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(-4px);
+}
+.tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    background: #2b2b2b;
+    color: #fff;
+    border-radius: 6px;
+    padding: 6px 10px;
+    min-width: 120px;
+    max-width: 180px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #2b2b2b;
+}
+.tooltipName {
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.tooltipDesc {
+    font-size: 0.65rem;
+    opacity: 0.8;
+    line-height: 1.3;
 }
 .slotInner {
     width: 100%;

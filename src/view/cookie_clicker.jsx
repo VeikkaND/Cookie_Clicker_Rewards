@@ -1,7 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import Cookie from "../components/Cookie";
 import Shop from "../components/Shop";
-import Collectibles from "../components/Collectibles";
+import Collectibles, { COLLECTIBLES } from "../components/Collectibles";
+import CollectibleCelebration from "../components/CollectibleCelebration";
 import style from "./style.module.css";
 import cookieImage from "../assets/cookie_pixel.svg";
 import secretSound from "../assets/miauu.mp3";
@@ -11,6 +12,7 @@ export default function CookieClicker() {
     const [ppc, setPpc] = useState(1);
     const [cookieMonsters, setCookieMonsters] = useState(0);
     const [unlockedCollectibles, setUnlockedCollectibles] = useState([]);
+    const [celebrationCollectible, setCelebrationCollectible] = useState(null);
 
     const [goldenCookie, setGoldenCookie] = useState(null);
     const [manualClicks, setManualClicks] = useState(0);
@@ -23,6 +25,15 @@ export default function CookieClicker() {
 
     const upgradeCost = 50;
     const cookieMonsterCost = 150;
+
+    const unlockCollectible = (id) => {
+        setUnlockedCollectibles((prev) => {
+            if (prev.includes(id)) return prev;
+            const item = COLLECTIBLES.find((c) => c.id === id);
+            if (item) setCelebrationCollectible(item);
+            return [...prev, id];
+        });
+    };
 
     const addNotification = (message) => {
         const id = Date.now();
@@ -85,7 +96,7 @@ export default function CookieClicker() {
     setPoints((prev) => prev + 50);
     setGoldenCookie(null);
     if (!unlockedCollectibles.includes(0)) {
-        setUnlockedCollectibles((prev) => [...prev, 0]);
+        unlockCollectible(0);
         addNotification("Collectible unlocked: Golden Cookie!");
     }
 };
@@ -195,6 +206,11 @@ export default function CookieClicker() {
                     style={{ top: rollingCookie.y, left: rollingCookie.x }}
                 />
             )}
+
+            <CollectibleCelebration
+                collectible={celebrationCollectible}
+                onClose={() => setCelebrationCollectible(null)}
+            />
         </div>
     );
 }
