@@ -13,6 +13,11 @@ export default function CookieClicker() {
     const [cookieMonsters, setCookieMonsters] = useState(0);
     const [unlockedCollectibles, setUnlockedCollectibles] = useState([]);
     const [celebrationCollectible, setCelebrationCollectible] = useState(null);
+    const [collectibleCounts, setCollectibleCounts] = useState({});
+
+    const incrementCount = (id) => {
+        setCollectibleCounts((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+    };
 
     const [goldenCookie, setGoldenCookie] = useState(null);
     const [manualClicks, setManualClicks] = useState(0);
@@ -75,8 +80,13 @@ export default function CookieClicker() {
             name: "critClick",
             chance: 0.02,
             action: () => {
-                setPoints((prev) => prev + ppc * 2);
-                addNotification(`💥 Critical Click! +${ppc * 2}`);
+                const critDamage = ppc * 2;
+                setPoints((prev) => prev + critDamage);
+                addNotification(`💥 Critical Click! +${critDamage}`);
+                if (critDamage >= 50) {
+                    unlockCollectible(2);
+                    incrementCount(2);
+                }
             }
         },
 
@@ -95,6 +105,7 @@ export default function CookieClicker() {
    const handleGoldenClick = () => {
     setPoints((prev) => prev + 50);
     setGoldenCookie(null);
+    incrementCount(0);
     if (!unlockedCollectibles.includes(0)) {
         unlockCollectible(0);
         addNotification("Collectible unlocked: Golden Cookie!");
@@ -127,11 +138,18 @@ export default function CookieClicker() {
 
 
     useEffect(() => {
-        if (manualClicks >= 250 && !secretUnlocked) {
+        if (cookieMonsters >= 25) {
+            unlockCollectible(3);
+        }
+    }, [cookieMonsters]);
+
+    useEffect(() => {
+        if (manualClicks >= 1000 && !secretUnlocked) {
             setSecretUnlocked(true);
             secretAudio.currentTime = 0;
             secretAudio.play();
             addNotification("Meow :3 The Cookie remembers you...");
+            unlockCollectible(4);
         }
     }, [manualClicks, secretUnlocked, secretAudio]);
 
@@ -164,7 +182,7 @@ export default function CookieClicker() {
                         />
                     </div>
 
-                    <Collectibles unlockedIds={unlockedCollectibles} />
+                    <Collectibles unlockedIds={unlockedCollectibles} collectibleCounts={collectibleCounts} />
                 </div>
 
                 <div className={style.rightColumn}>
@@ -202,8 +220,19 @@ export default function CookieClicker() {
             </div>
 
             {rollingCookie && (
-                <img src={cookieImage} alt="Rolling Cookie" className={style.rollingCookie}
+                <img
+                    src={cookieImage}
+                    alt="Rolling Cookie"
+                    className={style.rollingCookie}
                     style={{ top: rollingCookie.y, left: rollingCookie.x }}
+                    onClick={() => {
+                        setRollingCookie(null);
+                        incrementCount(1);
+                        if (!unlockedCollectibles.includes(1)) {
+                            unlockCollectible(1);
+                            addNotification("Collectible unlocked: Rolling Cookie!");
+                        }
+                    }}
                 />
             )}
 

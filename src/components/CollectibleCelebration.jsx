@@ -6,7 +6,7 @@ export default function CollectibleCelebration({ collectible, onClose }) {
     return (
         <div className={style.overlay} onClick={onClose}>
             <div className={style.modal} onClick={(e) => e.stopPropagation()}>
-                <div className={style.sparkleRow}>✨ 🎉 ✨</div>
+                <div className={style.sparkleRow}>🎉 🎉 🎉</div>
                 <p className={style.label}>New Collectible Unlocked!</p>
                 <div className={style.iconWrap}>
                     {collectible.image

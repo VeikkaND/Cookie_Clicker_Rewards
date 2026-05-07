@@ -6,10 +6,10 @@ import cookieImage from "../assets/cookie_pixel.svg";
 export const COLLECTIBLES = [
     //Event based Collectibles
     { id: 0, image: cookieImage, name: "Golden Cookie", description: "A shiny golden cookie", hint: "Ever heard of a pop up cookie?" },
-    { id: 1, emoji: "🌙", name: "Rolling Cookie", description: "They see me rollin...", hint: "Something might move horizontally, click it!" },
-    { id: 2, emoji: "🔥", name: "Critical Hit", description: "CRITICAL HIT", hint: "Surely a critical hit of enough caliber flips this open" },
-    { id: 3, emoji: "💎", name: "Diamond", description: "A rare gem", hint: "Hint text here" },
-    { id: 4, emoji: "🍀", name: "Clover", description: "A lucky clover", hint: "Hint text here" },
+    { id: 1, image: cookieImage, rolling: true, name: "Rolling Cookie", description: "They see me rollin...", hint: "Something might move horizontally, click it!" },
+    { id: 2, emoji: "🗡️", name: "Critical Hit", description: "Big Click Big Hit", hint: "Surely a critical hit of enough caliber flips this open" },
+    { id: 3, emoji: "👻", name: "Cookie Monsterrr", description: "He will be eating ur cookies", hint: "Have you tried adding some monsters?" },
+    { id: 4, emoji: "🐈‍⬛", name: "Meow", description: "That was one hot meow", hint: "Keep on clicking" },
     { id: 5, emoji: "🌈", name: "Rainbow", description: "A colorful rainbow", hint: "Hint text here" },
     //Point based Collectibles
     { id: 6, emoji: "⚡", name: "Lightning", description: "A lightning bolt", hint: "Hint text here" },
@@ -20,7 +20,9 @@ export const COLLECTIBLES = [
     { id: 11, emoji: "🚀", name: "Rocket", description: "A rocket ship", hint: "Hint text here" },
 ];
 
-export default function Collectibles({ unlockedIds = [] }) {
+const COUNTED_IDS = [0, 1, 2];
+
+export default function Collectibles({ unlockedIds = [], collectibleCounts = {} }) {
     const safeIds = Array.isArray(unlockedIds) ? unlockedIds : [];
 
     return (
@@ -35,9 +37,16 @@ export default function Collectibles({ unlockedIds = [] }) {
                                 <div className={style.slotFront}>?</div>
                                 <div className={style.slotBack}>
                                     {item.image
-                                        ? <img src={item.image} alt={item.name} className={style.collectibleImage} />
+                                        ? <img
+                                            src={item.image}
+                                            alt={item.name}
+                                            className={`${style.collectibleImage} ${unlocked && item.rolling ? style.collectibleRolling : ""}`}
+                                          />
                                         : item.emoji
                                     }
+                                    {unlocked && COUNTED_IDS.includes(item.id) && collectibleCounts[item.id] > 0 && (
+                                        <span className={style.countBadge}>×{collectibleCounts[item.id]}</span>
+                                    )}
                                 </div>
                             </div>
                             <div className={style.tooltip}>
