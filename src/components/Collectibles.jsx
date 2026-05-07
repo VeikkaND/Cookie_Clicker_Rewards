@@ -10,14 +10,14 @@ export const COLLECTIBLES = [
     { id: 2, emoji: "🗡️", name: "Critical Hit", description: "Big Click Big Hit", hint: "Surely a critical hit of enough caliber flips this open" },
     { id: 3, emoji: "👻", name: "Cookie Monsterrr", description: "He will be eating ur cookies", hint: "Have you tried adding some monsters?" },
     { id: 4, emoji: "🐈‍⬛", name: "Meow", description: "That was one hot meow", hint: "Keep on clicking" },
-    { id: 5, emoji: "🌈", name: "Rainbow", description: "A colorful rainbow", hint: "Hint text here" },
+    { id: 5, emoji: "⁶🤷‍♂️⁷", name: "67", description: "Hahaha funny meme", hint: "Click really fast... like really fast" },
     //Point based Collectibles
-    { id: 6, emoji: "⚡", name: "Lightning", description: "A lightning bolt", hint: "Hint text here" },
-    { id: 7, emoji: "🎯", name: "Target", description: "A bullseye", hint: "Hint text here" },
-    { id: 8, emoji: "👑", name: "Crown", description: "A royal crown", hint: "Hint text here" },
-    { id: 9, emoji: "🧲", name: "Magnet", description: "A powerful magnet", hint: "Hint text here" },
-    { id: 10, emoji: "🎪", name: "Circus", description: "A big top tent", hint: "Hint text here" },
-    { id: 11, emoji: "🚀", name: "Rocket", description: "A rocket ship", hint: "Hint text here" },
+    { id: 6, emoji: "⚡", name: "100 Points!", description: "Great job!", hint: "Reach 100 points" },
+    { id: 7, emoji: "🎯", name: "500 Points!", description: "Wow you made it here!", hint: "Reach 500 points" },
+    { id: 8, emoji: "👑", name: "2500 Points!", description: "Thats alot of points!", hint: "Reach 2500 points" },
+    { id: 9, emoji: "🧲", name: "10000 Points!", description: "Wow, you sure are something", hint: "Reach 10 000 points" },
+    { id: 10, emoji: "🎪", name: "40 000 Points!", description: "Really?", hint: "Reach 40 000 points" },
+    { id: 11, emoji: "🚀", name: "100 000 Points!", description: "You did it!", hint: "Reach X XXX XXX points" },
 ];
 
 const COUNTED_IDS = [0, 1, 2];

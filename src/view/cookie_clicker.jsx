@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import Cookie from "../components/Cookie";
 import Shop from "../components/Shop";
 import Collectibles, { COLLECTIBLES } from "../components/Collectibles";
@@ -27,6 +27,16 @@ export default function CookieClicker() {
     const [notifications, setNotifications] = useState([]);
     const [rollingCookie, setRollingCookie] = useState(null);
     const [rollingCookieCooldown, setRollingCookieCooldown] = useState(false);
+    const clickTimestamps = useRef([]);
+
+    const trackFastClick = () => {
+        const now = Date.now();
+        clickTimestamps.current.push(now);
+        clickTimestamps.current = clickTimestamps.current.filter((t) => now - t <= 30000);
+        if (clickTimestamps.current.length >= 67) {
+            unlockCollectible(5);
+        }
+    };
 
     const upgradeCost = 50;
     const cookieMonsterCost = 150;
@@ -144,6 +154,15 @@ export default function CookieClicker() {
     }, [cookieMonsters]);
 
     useEffect(() => {
+        if (points >= 100)    unlockCollectible(6);
+        if (points >= 500)    unlockCollectible(7);
+        if (points >= 2500)   unlockCollectible(8);
+        if (points >= 10000)  unlockCollectible(9);
+        if (points >= 40000)  unlockCollectible(10);
+        if (points >= 110000) unlockCollectible(11);
+    }, [points]);
+
+    useEffect(() => {
         if (manualClicks >= 1000 && !secretUnlocked) {
             setSecretUnlocked(true);
             secretAudio.currentTime = 0;
@@ -205,6 +224,7 @@ export default function CookieClicker() {
                                 setPoints((prev) => prev + ppc);
                                 setManualClicks((prev) => prev + 1);
                                 handleClickEvents();
+                                trackFastClick();
                             }}
                             ppc={ppc}
                         />
