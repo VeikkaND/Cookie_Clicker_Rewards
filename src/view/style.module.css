@@ -150,3 +150,9 @@
     transform: translateX(110vw) rotate(720deg);
   }
 }
+
+.sideColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

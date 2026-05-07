@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import Cookie from "../components/Cookie";
 import Shop from "../components/Shop";
+import Collectibles from "../components/Collectibles";
 import style from "./style.module.css";
 import cookieImage from "../assets/cookie_pixel.svg";
 import secretSound from "../assets/miauu.mp3";
@@ -97,14 +98,14 @@ export default function CookieClicker() {
         }
         if (Math.random() < 0.25 && !rollingCookieCooldown) {
             setRollingCookieCooldown(true);
-            
+
             setRollingCookie({
                 id: Date.now(),
                 x: -60,
                 y: Math.random() * (window.innerHeight - 60)
             });
             setTimeout(() => setRollingCookie(null), 6000);
-            setTimeout(() => { setRollingCookieCooldown(false);}, 60000);
+            setTimeout(() => { setRollingCookieCooldown(false); }, 60000);
         }
     };
 
@@ -151,7 +152,9 @@ export default function CookieClicker() {
                             setPoints((prev) => prev - cookieMonsterCost);
                         }}
                     />
+
                 </div>
+
 
                 <div className={style.card}>
                     <h1 className={style.title}>🍪Cookie Clicker</h1>
@@ -186,6 +189,10 @@ export default function CookieClicker() {
                 <div className={style.card} style={{ opacity: 0 }}>
                 </div>
             </div>
+            {/* Collectibles row below */}
+            <div className={style.collectiblesRow}>
+                <Collectibles collectibles={[]} />
+            </div>
 
 
             <div className={style.notificationContainer}>
@@ -201,7 +208,7 @@ export default function CookieClicker() {
                 style={{
                     top: rollingCookie.y,
                     left: rollingCookie.x,
-                }}/>
+                }} />
             )}
         </div>
 
