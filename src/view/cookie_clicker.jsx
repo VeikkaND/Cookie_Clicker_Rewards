@@ -10,6 +10,7 @@ export default function CookieClicker() {
     const [points, setPoints] = useState(0);
     const [ppc, setPpc] = useState(1);
     const [cookieMonsters, setCookieMonsters] = useState(0);
+    const [unlockedCollectibles, setUnlockedCollectibles] = useState([]);
 
     const [goldenCookie, setGoldenCookie] = useState(null);
     const [manualClicks, setManualClicks] = useState(0);
@@ -21,7 +22,7 @@ export default function CookieClicker() {
     const [rollingCookieCooldown, setRollingCookieCooldown] = useState(false);
 
     const upgradeCost = 50;
-    const cookieMonsterCost = 5;
+    const cookieMonsterCost = 150;
 
     const addNotification = (message) => {
         const id = Date.now();
@@ -80,10 +81,14 @@ export default function CookieClicker() {
 
 
 
-    const handleGoldenClick = () => {
-        setPoints((prev) => prev + 50);
-        setGoldenCookie(null);
-    };
+   const handleGoldenClick = () => {
+    setPoints((prev) => prev + 50);
+    setGoldenCookie(null);
+    if (!unlockedCollectibles.includes(0)) {
+        setUnlockedCollectibles((prev) => [...prev, 0]);
+        addNotification("Collectible unlocked: Golden Cookie!");
+    }
+};
 
 
     const handleClickEvents = () => {
@@ -96,7 +101,7 @@ export default function CookieClicker() {
                 break;
             }
         }
-        if (Math.random() < 0.25 && !rollingCookieCooldown) {
+        if (Math.random() < 0.01 && !rollingCookieCooldown) {
             setRollingCookieCooldown(true);
 
             setRollingCookie({
@@ -148,7 +153,7 @@ export default function CookieClicker() {
                         />
                     </div>
 
-                    <Collectibles collectibles={[]} />
+                    <Collectibles unlockedIds={unlockedCollectibles} />
                 </div>
 
                 <div className={style.rightColumn}>

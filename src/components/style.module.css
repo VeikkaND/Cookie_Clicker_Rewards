@@ -79,8 +79,7 @@
     width: 100%;
 }
 .slot {
-    width: 60px;
-    height: 48px;
+    aspect-ratio: 1;
     border: 2px dashed #2b2b2b;
     border-radius: 8px;
     display: flex;
@@ -89,5 +88,39 @@
     font-size: 2rem;
     background: #f9f9f9;
     color: #353535;
-    padding: 10px;
+    overflow: hidden;    /* add this */
+    box-sizing: border-box;
+}
+.slotInner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+.slotInner.flipped {
+    transform: rotateY(180deg);
+}
+.slotFront, .slotBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+.slotFront {
+    background: #f9f9f9;
+    color: #aaa;
+}
+.slotBack {
+    background: #fff8e1;
+    transform: rotateY(180deg);
+}
+.collectibleImage {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }
