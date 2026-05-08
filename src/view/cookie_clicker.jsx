@@ -245,7 +245,7 @@ export default function CookieClicker() {
                         </div>
                     )}
                     <div className={style.card}>
-                        <h1 className={style.title}>🍪Cookie Clicker</h1>
+                        <h1 className={style.title}>🍪Cookie Clicker B</h1>
                         <p className={style.subtitle}>Click the cookie and earn points</p>
                         <div className={style.scoreBox}>
                             <p className={style.scoreLabel}>Points</p>
