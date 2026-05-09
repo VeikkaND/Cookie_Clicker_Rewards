@@ -6,8 +6,11 @@ import CollectibleCelebration from "../components/CollectibleCelebration";
 import style from "./style.module.css";
 import cookieImage from "../assets/cookie_pixel.svg";
 import secretSound from "../assets/miauu.mp3";
+import menuImage from "../assets/menu.svg";
+import closeImage from "../assets/close.svg";
 
 export default function CookieClicker() {
+    const [menuVisible, setMenuVisible] = useState((window.innerWidth > 600) ? true : false);
     const [points, setPoints] = useState(0);
     const [ppc, setPpc] = useState(1);
     const [cookieMonsters, setCookieMonsters] = useState(0);
@@ -62,7 +65,13 @@ export default function CookieClicker() {
         }, 2500);
     };
 
-
+    const handleMenuClick = () => {
+        setMenuVisible(true);
+    }
+    
+    const handleCloseClick = () => {
+        setMenuVisible(false);
+    }
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -199,9 +208,16 @@ export default function CookieClicker() {
         <div className={style.container}>
             <div className={style.cardContainer}>
 
-                <div className={style.leftColumn}>
+                <div className={style.leftColumn} style={{display: menuVisible ? "flex" : "none"}}>
                     <div className={style.card}>
-                        <h1 className={style.title}>Shop</h1>
+                        <div className={style.titleRow}>
+                            <button className={style.closeButton}
+                            onClick={handleCloseClick}>
+                                <img src={closeImage}></img>
+                            </button>
+                            <h1 className={style.title}>Shop</h1>
+                        </div>
+                        
                         <p className={style.subtitle}>Points per click: {ppc}</p>
                         <p className={style.subtitle}>Cookie Monsters: {cookieMonsters}</p>
                         <Shop
@@ -245,7 +261,13 @@ export default function CookieClicker() {
                         </div>
                     )}
                     <div className={style.card}>
-                        <h1 className={style.title}>🍪Cookie Clicker B</h1>
+                        <div className={style.titleRow}>
+                            <button onClick={handleMenuClick} 
+                            className={style.menuButton}>
+                                <img src={menuImage}></img>
+                            </button>
+                            <h1 className={style.title}>🍪Cookie Clicker B</h1>
+                        </div>
                         <p className={style.subtitle}>Click the cookie and earn points</p>
                         <div className={style.scoreBox}>
                             <p className={style.scoreLabel}>Points</p>
