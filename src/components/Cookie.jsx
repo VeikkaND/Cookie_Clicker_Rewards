@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import image from "../assets/cookie_pixel.svg";
 import style from "./style.module.css";
 import audio from "../assets/crunch.mp3";
 
 export default function CookieClicker({ setPoints, ppc }) {
     const [particles, setParticles] = useState([]);
-    const crunchSound = new Audio(audio);
+    const crunchSound = useRef(new Audio(audio));
+    const imgRef = useRef(null);
+
+    useEffect(() => {
+        const el = imgRef.current;
+        if(!el) return;
+        const prevent = (e) => e.preventDefault();
+        el.addEventListener("touchstart", prevent, { passive: false });
+        return () => el.removeEventListener("touchstart", prevent);
+    }, [])
 
     const handleClick = (e) => {
         setPoints();
-        crunchSound.currentTime = 0;
-        crunchSound.play();
+        crunchSound.current.currentTime = 0;
+        crunchSound.current.play();
 
         const rect = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -27,12 +36,13 @@ export default function CookieClicker({ setPoints, ppc }) {
     return (
         <div style={{ position: "relative", display: "inline-block" }}>
             <img
+                ref={imgRef}
                 src={image}
                 role="button"
                 alt="Cookie"
                 draggable="false"
                 className={style.cookie}
-                onClick={handleClick}
+                onPointerDown={handleClick}
                 tabIndex={0}
                 onKeyDown={(e) => e.key === "Enter" && handleClick(e)}
             />

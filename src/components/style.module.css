@@ -12,6 +12,9 @@
     user-select: none;
     -webkit-user-select: none;
     -webkit-user-drag: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 .cookie:hover {
