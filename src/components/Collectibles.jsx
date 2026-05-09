@@ -10,6 +10,8 @@ import cake3Image from "../assets/cake3.png";
 import cake4Image from "../assets/cake4.png";
 import cake5Image from "../assets/cake5.png";
 import catzetteImage from "../assets/catzette.png";
+import spidey from "../assets/spidey.png";
+import foxy from "../assets/foxy.png";
 
 // Ylhäällä import asseteista image, muokkaa alemmas sen mukaiseksi.
 export const COLLECTIBLES = [
@@ -25,7 +27,7 @@ export const COLLECTIBLES = [
     { id: 7, image: cake1Image, rarity: "common", name: "500 Points!", description: "Wow you made it here!", hint: "Reach 500 points" },
     { id: 8, image: cake2Image, rarity: "rare", name: "2500 Points!", description: "Thats alot of points!", hint: "Reach 2500 points" },
     { id: 9, image: cake3Image, rarity: "epic", name: "10000 Points!", description: "Wow, you sure are something", hint: "Reach 10 000 points" },
-    { id: 10, image: cake4Image, rarity: "legendary", name: "40 000 Points!", description: "Really?", hint: "Reach 40 000 points" },
+    { id: 10, image: foxy, rarity: "legendary", name: "40 000 Points!", description: "Really?", hint: "Reach 40 000 points" },
     { id: 11, image: cake5Image, rarity: "legendary", name: "100 000 ish Points!", description: "You thought it was 1 million?", hint: "Reach X XXX XXX points" },
 ];
 

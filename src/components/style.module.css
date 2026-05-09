@@ -297,14 +297,15 @@
 }
 
 .common {
-    background: linear-gradient(#f4f4f4, #d9d9d9);
-    border: #bdbdbd;
+    background: linear-gradient(#e3f7cd, #83eb69);
+    border: #44d157;
+    box-shadow: 0 0 10px rgba(36, 145, 72, 0.35);
 }
 
 .rare {
     background: linear-gradient(#dff1ff, #9fd3ff);
     border: #4ea1ff;
-    box-shadow: 0 0 10px rgba(78,161,255,0.35);
+    box-shadow: 0 0 10px rgba(11, 12, 12, 0.35);
 }
 
 .epic {
