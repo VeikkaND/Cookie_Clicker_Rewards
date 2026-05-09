@@ -10,13 +10,25 @@ export default function Shop({title,cost,points,onBuy})
     };
 
     return (
-        <div>
-            <button
-                onClick={handleClick}
-                className={style.upgrade}
-            >
-                {title} ({cost} points)
-            </button>
+<div className={style.shopItem}>
+    <button
+        onClick={handleClick}
+        className={`${style.upgrade} ${points < cost ? style.disabled : ""}`}
+    >
+        <div className={style.upgradeTop}>
+            <span className={style.upgradeTitle}>
+                {title}
+            </span>
+
+            <span className={style.upgradeCost}>
+                🍪 {cost}
+            </span>
         </div>
+
+        <div className={style.upgradeBottom}>
+            {points >= cost ? "Available" : "Not enough points"}
+        </div>
+    </button>
+</div>
     );
 }

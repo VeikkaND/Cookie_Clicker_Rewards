@@ -1,7 +1,8 @@
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,110 +11,293 @@
 }
 
 .modal {
+    position: relative;
+    overflow: hidden;
+
     background: #fff8e1;
-    border-radius: 16px;
+    border-radius: 24px;
+
     padding: 2.5rem 2rem 2rem;
-    max-width: 340px;
+
+    max-width: 360px;
     width: 90%;
+
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 4px #f5c842;
-    animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
 }
+
+.common {
+    border: 3px solid #bdbdbd;
+}
+
+.rare {
+    border: 3px solid #4ea1ff;
+
+    box-shadow:
+        0 0 25px rgba(78,161,255,0.35),
+        0 20px 60px rgba(0,0,0,0.3);
+}
+
+.epic {
+    border: 3px solid #b84dff;
+
+    box-shadow:
+        0 0 35px rgba(184,77,255,0.45),
+        0 20px 60px rgba(0,0,0,0.35);
+}
+
+.legendary {
+    border: 3px solid #ffb300;
+
+    box-shadow:
+        0 0 18px rgba(255,179,0,0.6),
+        0 0 45px rgba(255,215,0,0.5),
+        0 20px 70px rgba(0,0,0,0.4);
+}
+
+.particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particles span {
+    position: absolute;
+    font-size: 1.2rem;
+    animation: floatParticle 3s linear infinite;
+    opacity: 0.8;
+}
+
+.particles span:nth-child(1) {
+    left: 15%;
+    top: 85%;
+    animation-delay: 0s;
+}
+
+.particles span:nth-child(2) {
+    left: 75%;
+    top: 88%;
+    animation-delay: 1s;
+}
+
+.particles span:nth-child(3) {
+    left: 30%;
+    top: 92%;
+    animation-delay: 2s;
+}
+
+.particles span:nth-child(4) {
+    left: 60%;
+    top: 90%;
+    animation-delay: 1.5s;
+}
+
 
 .sparkleRow {
     font-size: 1.5rem;
     letter-spacing: 0.25rem;
     animation: sparkle 1.2s ease-in-out infinite alternate;
+    z-index: 2;
 }
 
 .label {
     font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #b8860b;
     margin: 0;
+    z-index: 2;
 }
 
 .iconWrap {
-    width: 100px;
-    height: 100px;
+    position: relative;
+    overflow: hidden;
+
+    width: 110px;
+    height: 110px;
+
     border-radius: 50%;
+
     background: linear-gradient(135deg, #ffe066, #ffb700);
+
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 30px rgba(255, 183, 0, 0.6);
-    margin: 0.5rem 0;
+
+    margin: 0.75rem 0;
+
     animation: glow 1.5s ease-in-out infinite alternate;
+
+    z-index: 2;
+}
+
+.iconWrap::before {
+    content: "";
+
+    position: absolute;
+    inset: -30%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.45),
+        transparent
+    );
+
+    transform: rotate(25deg);
+
+    animation: shine 3s linear infinite;
 }
 
 .emoji {
     font-size: 3rem;
+    z-index: 2;
 }
 
 .image {
     width: 65%;
     height: 65%;
     object-fit: contain;
+    z-index: 2;
 }
 
 .name {
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 1.6rem;
+    font-weight: 900;
     color: #2b2b2b;
     margin: 0;
+    z-index: 2;
+}
+
+.rarity {
+    margin: 0;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    z-index: 2;
 }
 
 .description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #666;
     margin: 0;
+    z-index: 2;
 }
 
 .button {
-    margin-top: 0.75rem;
-    padding: 0.65rem 2.5rem;
+    margin-top: 1rem;
+
+    padding: 0.7rem 2.5rem;
+
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
+
     background: linear-gradient(45deg, #f5c842, #ffb700);
+
     color: #2b2b2b;
+
     font-weight: 700;
     font-size: 1rem;
+
     cursor: pointer;
+
     box-shadow: 0 4px 14px rgba(245, 200, 66, 0.5);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
+
+    z-index: 2;
 }
 
 .button:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(245, 200, 66, 0.7);
+
+    box-shadow:
+        0 8px 24px rgba(245, 200, 66, 0.7);
 }
 
 .button:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
+
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes popIn {
-    from { opacity: 0; transform: scale(0.6); }
-    to   { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.55);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes glow {
-    from { box-shadow: 0 0 20px rgba(255, 183, 0, 0.5); }
-    to   { box-shadow: 0 0 40px rgba(255, 183, 0, 0.9); }
+    from {
+        box-shadow: 0 0 20px rgba(255, 183, 0, 0.5);
+    }
+
+    to {
+        box-shadow: 0 0 40px rgba(255, 183, 0, 0.9);
+    }
 }
 
 @keyframes sparkle {
-    from { transform: scale(1); }
-    to   { transform: scale(1.15); }
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes shine {
+    from {
+        transform: translateX(-120%) rotate(25deg);
+    }
+
+    to {
+        transform: translateX(120%) rotate(25deg);
+    }
+}
+
+@keyframes floatParticle {
+    from {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-180px) scale(1.2);
+        opacity: 0;
+    }
 }
